@@ -9,8 +9,10 @@ var emojiDictionary = {
   "👍": "Thumbs up",
   "✨": "Sparkle",
   "💡" : "Bulb",
-  "⚽": "Flower"
+  "⚽": "Ball"
 }
+
+var emojiInData = Object.keys(emojiDictionary)
 
 function App() {
   const [meaning, setMeaning] = useState("");
@@ -19,7 +21,7 @@ function App() {
     var input = event.target.value;
     var meaning = emojiDictionary[input];
 
-    if(meaning == undefined){
+    if(meaning === undefined){
       meaning = "Emoji is not present, Try other one";
     }
     setMeaning(meaning);
@@ -30,15 +32,15 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>Find Meaning of given emoji</h1>
-      <input onChange={emojiInputHandler}/>
+    <div class="App">
+      <h1>Find Meaning of emoji</h1>
+      <input id="input" onChange={emojiInputHandler}/>
       <h2>{meaning}</h2>
-      {emojiDictionary.map(function(emoji){
-        return(
-          <span onClick = {() => emojiClickHandler(emoji)} key = {emoji}></span>
-        );
-      })}
+      {
+        emojiInData.map(emoji => {
+          return <span id="emoji" onClick={() => emojiClickHandler(emoji)} key={emoji}>{emoji}</span>
+        })
+      }
     </div>
   );
 }
